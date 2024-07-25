@@ -67,9 +67,9 @@ export default function Game() {
         <SyntaxHighlighter language="javascript" style={gradientDark} wrapLines={true} showLineNumbers={true} >
           {questionInfo.code}
         </SyntaxHighlighter>
-        <ul>
+        <ul className="bg-slate-900">
           {questionInfo.answers.map((answer, index) => (
-            <li key={index} onClick={handleClick(index)} className={`flex justify-center items-center gap-4 p-2 bg-slate-900 cursor-pointer outline outline-1 outline-white/10 hover:outline-white/50 transition-all ${getBackgroundColor(questionInfo, index)}`}>
+            <li key={index} onClick={handleClick(index)} className={`flex justify-center items-center gap-4 p-2 cursor-pointer outline outline-1 outline-white/10 hover:outline-white/50 transition-all ${getBackgroundColor(questionInfo, index)}`}>
               {answer}
             </li>
           ))}
