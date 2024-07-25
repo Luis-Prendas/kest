@@ -1,18 +1,174 @@
 {
-    "rootQuestions": [
-        {
-            "question": "¿Cuál va a ser la respuesta del consol.log?",
-            "code": "const number_1 = 10\nconst number_2 = 20\nconst sum = number_1 + number_2\n\nconsole.log(sum)",
-            "answers": [ "30", "40", "50", "60" ],
-            "correctAnswer": 0,
-            "userAnswer": null
-        },
-        {
-            "question": "¿Cuál va a ser la respuesta del consol.log?",
-            "code": "const number_1 = 10\nconst number_2 = 20\nconst sum = number_1 - number_2\n\nconsole.log(sum)",
-            "answers": [ "30", "40", "50", "-10" ],
-            "correctAnswer": 3,
-            "userAnswer": null
-        }
-    ]
+  "rootQuestions": [
+    {
+      "id": 1,
+      "question": "¿Cuál será el output de este código?",
+      "code": "const obj = { a: 1 };\nconst weakMap = new WeakMap([[obj, 'foo']]);\nObject.defineProperty(obj, 'b', { value: 2 });\nconsole.log(weakMap.get(obj), Object.keys(obj).length);",
+      "answers": ["'foo' 1", "'foo' 2", "undefined 1", "undefined 2"],
+      "correctAnswer": 0,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "WeakMap mantiene una referencia débil al objeto, por lo que 'foo' se mantiene. Object.defineProperty con { value: 2 } crea una propiedad no enumerable, por lo que Object.keys(obj) solo incluye 'a'."
+    },
+    {
+      "id": 2,
+      "question": "¿Qué imprimirá este código de TypeScript?",
+      "code": "type Fruit = 'apple' | 'banana';\ntype Color = 'red' | 'yellow';\ntype FruitColor = `${Fruit}-${Color}`;\n\nlet fc: FruitColor = 'apple-red';\nconsole.log(fc);",
+      "answers": ["'apple-red'", "Error de compilación", "undefined", "'Fruit-Color'"],
+      "correctAnswer": 0,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Este código utiliza 'template literal types' de TypeScript. FruitColor es un tipo que combina todas las posibles combinaciones de Fruit y Color. 'apple-red' es una combinación válida."
+    },
+    {
+      "id": 3,
+      "question": "¿Cuál es el resultado de esta operación?",
+      "code": "console.log(1 + 2 + '3' - 4 + 5 * '6');",
+      "answers": ["335", "29", "3301", "NaN"],
+      "correctAnswer": 1,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Las operaciones se realizan de izquierda a derecha. 1 + 2 = 3, 3 + '3' = '33' (concatenación), '33' - 4 = 29 (conversión implícita a número), 29 + 5 * '6' = 59."
+    },
+    {
+      "id": 4,
+      "question": "¿Qué imprimirá este código?",
+      "code": "const proto = { x: 10 };\nconst obj = Object.create(proto);\nobj.y = 20;\nobj.x = 30;\ndelete obj.x;\nconsole.log(obj.x, obj.y);",
+      "answers": ["undefined 20", "30 20", "10 20", "null 20"],
+      "correctAnswer": 2,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Object.create crea un objeto con proto como prototipo. Al eliminar obj.x, se elimina la propiedad del objeto, pero no afecta al prototipo, por lo que obj.x vuelve a ser 10 del prototipo."
+    },
+    {
+      "id": 5,
+      "question": "En TypeScript, ¿qué significa este tipo?",
+      "code": "type DeepReadonly<T> = {\n  readonly [P in keyof T]: DeepReadonly<T[P]>\n};",
+      "answers": ["Hace solo la primera nivel de T readonly", "Hace todos los niveles de T readonly", "Causa un error de compilación", "No tiene efecto"],
+      "correctAnswer": 1,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Este es un tipo recursivo que hace que todas las propiedades de T y sus subpropiedades sean readonly. Es útil para crear objetos profundamente inmutables en TypeScript."
+    },
+    {
+      "id": 6,
+      "question": "¿Qué imprimirá este código?",
+      "code": "const arr = [1, 2, 3, 4, 5];\nconsole.log(arr.reduce((acc, cur) => acc * cur, 1));",
+      "answers": ["15", "120", "720", "Error"],
+      "correctAnswer": 1,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Este código usa reduce para multiplicar todos los elementos del array. El resultado es 1 * 1 * 2 * 3 * 4 * 5 = 120. El 1 inicial es el valor inicial proporcionado como segundo argumento a reduce."
+    },
+    {
+      "id": 7,
+      "question": "¿Cuál es el resultado de esta operación en TypeScript?",
+      "code": "type A = { a: string };\ntype B = { b: number };\ntype C = A & B;\n\nfunction f<T>(x: T): T extends A ? string : number {\n  return (x as any).a || 0;\n}\n\nconst c: C = { a: 'foo', b: 42 };\nconsole.log(typeof f(c));",
+      "answers": ["'string'", "'number'", "Error de compilación", "undefined"],
+      "correctAnswer": 0,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Este código utiliza conditional types. Dado que C extiende A, T extends A es verdadero, por lo que f(c) devuelve un string. El typeof de un string es 'string'."
+    },
+    {
+      "id": 8,
+      "question": "¿Qué imprimirá este código?",
+      "code": "function* gen() {\n  yield* [1, 2];\n  yield* '34';\n  yield* Array.from({length: 2}, (_, i) => i + 5);\n}\n\nconsole.log([...gen()]);",
+      "answers": ["[1, 2, '3', '4', 5, 6]", "[1, 2, 3, 4, 5, 6]", "[1, 2, '34', 5, 6]", "[1, 2, '3', '4', 5, 6]"],
+      "correctAnswer": 3,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Este generador yield* delega a otros iterables. [1, 2] produce 1 y 2, '34' es un string iterable que produce '3' y '4', y el último Array.from produce 5 y 6."
+    },
+    {
+      "id": 9,
+      "question": "¿Cuál es el resultado de esta operación?",
+      "code": "const sym1 = Symbol('foo');\nconst sym2 = Symbol('foo');\nconst obj = {[sym1]: 'bar'};\nconsole.log(obj[sym2], obj[sym1], obj['foo']);",
+      "answers": ["'bar' 'bar' undefined", "undefined 'bar' undefined", "'bar' 'bar' 'bar'", "undefined undefined undefined"],
+      "correctAnswer": 1,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Cada Symbol es único, incluso si tienen la misma descripción. obj[sym2] es undefined porque sym2 no está en obj. obj[sym1] es 'bar'. obj['foo'] es undefined porque 'foo' no es una propiedad de obj."
+    },
+    {
+      "id": 10,
+      "question": "En TypeScript, ¿qué significa este tipo?",
+      "code": "type Unpacked<T> = T extends (infer U)[] ? U : T extends (...args: any[]) => infer U ? U : T extends Promise<infer U> ? U : T;",
+      "answers": ["Extrae el tipo de un array, función o promesa", "Convierte un tipo en un array", "Hace que un tipo sea nullable", "No tiene efecto"],
+      "correctAnswer": 0,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Este tipo utiliza conditional types e infer para 'desempaquetar' tipos. Si T es un array, devuelve el tipo de sus elementos. Si es una función, devuelve su tipo de retorno. Si es una Promise, devuelve el tipo que resuelve. De lo contrario, devuelve T sin cambios."
+    },
+    {
+      "id": 11,
+      "question": "¿Qué imprimirá este código?",
+      "code": "console.log(1 < 2 < 3, 3 > 2 > 1);",
+      "answers": ["true true", "true false", "false true", "false false"],
+      "correctAnswer": 1,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Las comparaciones se evalúan de izquierda a derecha. 1 < 2 es true, luego true < 3 se convierte en 1 < 3, que es true. 3 > 2 es true, luego true > 1 se convierte en 1 > 1, que es false."
+    },
+    {
+      "id": 12,
+      "question": "¿Cuál es el resultado de esta operación en TypeScript?",
+      "code": "type Flatten<T> = T extends any[] ? T[number] : T;\ntype A = Flatten<string[]>;\ntype B = Flatten<string>;\ntype C = Flatten<[number, string]>;\n\nlet a: A = 'foo';\nlet b: B = 'bar';\nlet c: C = 42;\nconsole.log(typeof a, typeof b, typeof c);",
+      "answers": ["'string' 'string' 'string'", "'string' 'string' 'number'", "Error de compilación", "'object' 'string' 'number'"],
+      "correctAnswer": 1,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Flatten<T> 'aplana' arrays en sus tipos de elemento. Para string[], resulta en string. Para string, no cambia. Para [number, string], resulta en number | string. Por lo tanto, a y b son string, y c puede ser number o string."
+    },
+    {
+      "id": 13,
+      "question": "¿Qué imprimirá este código?",
+      "code": "const obj = { a: 1 };\nObject.defineProperty(obj, 'b', { value: 2 });\nObject.defineProperty(obj, 'c', { value: 3, enumerable: true });\nconsole.log(Object.keys(obj).length, Object.getOwnPropertyNames(obj).length);",
+      "answers": ["1 2", "2 3", "1 3", "3 3"],
+      "correctAnswer": 2,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Object.keys solo devuelve las propiedades enumerables (a y c). Object.getOwnPropertyNames devuelve todas las propiedades propias, incluyendo las no enumerables (a, b, y c)."
+    },
+    {
+      "id": 14,
+      "question": "En TypeScript, ¿qué hace este tipo?",
+      "code": "type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T;",
+      "answers": ["Hace todas las propiedades opcionales", "Hace solo las propiedades del primer nivel opcionales", "No tiene efecto", "Causa un error de compilación"],
+      "correctAnswer": 0,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "DeepPartial es un tipo recursivo que hace que todas las propiedades de un objeto y sus sub-objetos sean opcionales. Es útil cuando se quiere crear un tipo que represente una versión parcial profunda de otro tipo."
+    },
+    {
+      "id": 15,
+      "question": "¿Qué imprimirá este código?",
+      "code": "const arr = [1, 2, 3, 4, 5];\nconsole.log(arr.slice(-2, -1), arr.slice(-1, -2));",
+      "answers": ["[4] []", "[4] [5]", "[5] []", "[4] [4]"],
+      "correctAnswer": 0,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "arr.slice(-2, -1) devuelve [4] porque comienza en el penúltimo elemento y termina antes del último. arr.slice(-1, -2) devuelve [] porque el índice de inicio es mayor que el de fin."
+    },
+    {
+      "id": 16,
+      "question": "¿Cuál es el resultado de esta operación?",
+      "code": "console.log(Function.prototype.call.call(function(a, b) { return a + b }, null, 1, 2));",
+      "answers": ["3", "undefined", "Error", "NaN"],
+      "correctAnswer": 0,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "Este código utiliza Function.prototype.call.call para invocar la función anónima. El primer 'call' establece el contexto de 'this' para el segundo 'call', que a su vez invoca la función anónima con los argumentos 1 y 2."
+    },
+    {
+      "id": 17,
+      "question": "En TypeScript, ¿qué significa este tipo?",
+      "code": "type NonNullable<T> = T extends null | undefined ? never : T;",
+      "answers": ["Convierte null y undefined en never", "Hace que un tipo no pueda ser null", "Causa un error si T es null o undefined", "No tiene efecto"],
+      "correctAnswer": 1,
+      "isCorrect": false,
+      "userAnswer": null,
+      "explanation": "NonNullable es un tipo condicional que toma un tipo T y devuelve un nuevo tipo excluyendo null y undefined. Si T es null o undefined, el tipo resultante es never, de lo contrario, es T."
+    }
+  ]
 }

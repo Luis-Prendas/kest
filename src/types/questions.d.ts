@@ -1,7 +1,10 @@
 interface Question {
+    id: number,
     question: string,
     code: string,
     answers: string[],
     correctAnswer: number,
-    userAnswer: number | null
+    isCorrect: boolean,
+    userAnswer: number | null,
+    explanation: string
 }
