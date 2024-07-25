@@ -24,7 +24,7 @@ const useQuestionsStore = create<QuestionsState>((set, get) => ({
   },
 
   selectAnswer: (questionId: number, answerIndex: number) => {
-    const { questions, goNextQuestion } = get()
+    const { questions } = get()
 
     // usar el structuredClone para clonar el objeto
     const newQuestions = structuredClone(questions)
