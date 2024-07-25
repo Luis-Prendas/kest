@@ -2,14 +2,14 @@
     "rootQuestions": [
         {
             "question": "¿Cuál va a ser la respuesta del consol.log?",
-            "code": "const number_1 = 10 \n const number_2 = 20 \n const sum = number_1 + number_2 \n\n console.log(sum)",
+            "code": "const number_1 = 10\nconst number_2 = 20\nconst sum = number_1 + number_2\n\nconsole.log(sum)",
             "answers": [ "30", "40", "50", "60" ],
             "correctAnswer": 0,
             "userAnswer": null
         },
         {
             "question": "¿Cuál va a ser la respuesta del consol.log?",
-            "code": "const number_1 = 10 \n const number_2 = 20 \n const sum = number_1 - number_2 \n\n console.log(sum)",
+            "code": "const number_1 = 10\nconst number_2 = 20\nconst sum = number_1 - number_2\n\nconsole.log(sum)",
             "answers": [ "30", "40", "50", "-10" ],
             "correctAnswer": 3,
             "userAnswer": null

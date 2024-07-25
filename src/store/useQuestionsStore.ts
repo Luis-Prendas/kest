@@ -3,7 +3,8 @@ import { create } from 'zustand'
 interface QuestionsState {
   questions: Question[],
   currentQuestion: number,
-  fetchQuestions: (limit: number) => Promise<void>
+  fetchQuestions: (limit: number) => Promise<void>,
+  reset: () => void
 }
 
 const useQuestionsStore = create<QuestionsState>((set) => ({
@@ -15,6 +16,9 @@ const useQuestionsStore = create<QuestionsState>((set) => ({
     const questions = json.rootQuestions.sort(() => Math.random() - 0.5).slice(0, limit)
     set({ questions })
   },
+  reset: () => {
+    set({ currentQuestion: 0, questions: [] })
+  }
 }))
 
 export default useQuestionsStore
