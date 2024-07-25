@@ -3,6 +3,7 @@ import useQuestionsStore from "../store/useQuestionsStore";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { gradientDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { useQuestionsData } from "../hooks/useQuestionsData";
+import { supabase } from "../supabaseClient";
 
 const getBackgroundColor = (info: Question, index: number) => {
   const { userAnswer, correctAnswer } = info
@@ -31,6 +32,26 @@ export default function Game() {
   const handleClick = (answerIndex: number) => () => {
     if (questionInfo.userAnswer === null) {
       selectAnswer(questionInfo.id, answerIndex)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const formValues = new FormData(e.currentTarget)
+    const name = formValues.get('name')
+
+    if (name && correct) {
+      const { error } = await supabase
+        .from('Leaderboard')
+        .insert({ name, points: correct.toString() })
+
+      if (error) {
+        console.error('Error adding entry:', error)
+        return
+      }
+
+      reset()
     }
   }
 
@@ -63,6 +84,15 @@ export default function Game() {
           Resetear juego
         </button>
       </footer>
+
+      {questions.length > 0 && unanswered === 0 && (
+        <form className="flex gap-4" onSubmit={handleSubmit}>
+          <input type="text" name="name" placeholder="Nombre para el leaderboard" className="bg-slate-900 p-2 rounded w-[310px]" required />
+          <button type="submit" className="bg-indigo-600 p-2 px-8 rounded hover:bg-indigo-500 transition-colors">
+            Registrar
+          </button>
+        </form>
+      )}
     </section>
   )
 }

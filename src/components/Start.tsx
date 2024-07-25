@@ -1,6 +1,6 @@
 import useQuestionsStore from "../store/useQuestionsStore"
 
-const LIMIT_QUESTIONS = 10
+const LIMIT_QUESTIONS = 3
 
 export default function Start({ setShowLeaderboard }: { setShowLeaderboard: React.Dispatch<React.SetStateAction<boolean>> }) {
     const fetchQuestions = useQuestionsStore(state => state.fetchQuestions)

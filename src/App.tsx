@@ -11,16 +11,6 @@ export default function App() {
 
   const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
 
-  // const handleSubmit = async () => {
-  //   const { data, error } = await supabase
-  //     .from('Leaderboard')
-  //     .insert({ name: 'test', points: '10' });
-
-  //   console.log(data);
-
-  //   if (error) console.error('Error adding entry:', error);
-  // };
-
   return (
     <main className='w-full h-screen flex flex-col items-center justify-center gap-8 bg-slate-900 text-gray-200'>
       <div className='flex flex-col items-center justify-center'>

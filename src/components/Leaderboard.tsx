@@ -41,7 +41,7 @@ export default function Leaderboard({ setShowLeaderboard }: { setShowLeaderboard
                   {entry.name}
                 </th>
                 <td className="px-6 py-4 text-center">
-                  {entry.points}
+                  {entry.points} /10
                 </td>
               </tr>
             ))}
